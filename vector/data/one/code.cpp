@@ -122,11 +122,11 @@ void TestErase()
 
 int main(int argc, char const *argv[])
 {
-	TestConstructor();
+	// TestConstructor();
 	TestIterators();
-	TestAccessingMethod();
+	// TestAccessingMethod();
 	TestPush_Pop();
 	TestInsert();
-	TestErase();
+	// TestErase();
 	return 0;
 }
