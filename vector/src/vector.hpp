@@ -3,7 +3,6 @@
 
 #include "exceptions.hpp"
 
-#include <iostream>
 #include <climits>
 #include <cstddef>
 
@@ -325,6 +324,9 @@ public:
   void clear() {
     size_ = 0;
     capacity_ = 3;
+    for (size_t i = 0; i < size_; ++i) {
+      array_[i].~T();
+    }
     operator delete [] (array_);
     array_ = static_cast<T *>(operator new [] (capacity_ * sizeof(T)));
   }
@@ -346,9 +348,10 @@ public:
       throw index_out_of_bound();
     }
     for (int pos = size_; pos > ind; --pos) {
-      array_[pos] = array_[pos - 1];
+      array_[pos] = std::move(array_[pos - 1]);
     }
-    array_[ind] = value;
+    array_[ind].~T();
+    new(&array_[ind]) T(value);
     ++size_;
     if (size_ == capacity_) {
       DoubleCapacity();
@@ -376,8 +379,9 @@ public:
       clear();
       return end();
     }
+    array_[ind].~T();
     for (size_t i = ind; i < size_; ++i) {
-      array_[i] = array_[i + 1];
+      array_[i] = std::move(array_[i + 1]);
     }
     --size_;
     if (size_ * 3 <= capacity_) {
@@ -389,7 +393,7 @@ public:
     * adds an element to the end.
     */
   void push_back(const T &value) {
-    array_[size_++] = value;
+    new(&array_[size_++]) T(value);
     if (size_ == capacity_) {
       DoubleCapacity();
     }
@@ -403,6 +407,7 @@ public:
       return clear();
     }
     --size_;
+    array_[size_].~T();
     if (size_ * 3 <= capacity_) {
       ShrinkCapacity();
     }
