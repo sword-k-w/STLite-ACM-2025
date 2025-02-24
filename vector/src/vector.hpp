@@ -322,11 +322,11 @@ public:
     * clears the contents
     */
   void clear() {
-    size_ = 0;
     capacity_ = 3;
     for (size_t i = 0; i < size_; ++i) {
       array_[i].~T();
     }
+    size_ = 0;
     operator delete [] (array_);
     array_ = static_cast<T *>(operator new [] (capacity_ * sizeof(T)));
   }
@@ -347,10 +347,10 @@ public:
     if (ind > size_) {
       throw index_out_of_bound();
     }
-    for (int pos = size_; pos > ind; --pos) {
-      array_[pos] = std::move(array_[pos - 1]);
+    for (size_t i = size_; i > ind; --i) {
+      new(&array_[i]) T(array_[i - 1]);
+      array_[i - 1].~T();
     }
-    array_[ind].~T();
     new(&array_[ind]) T(value);
     ++size_;
     if (size_ == capacity_) {
@@ -379,11 +379,11 @@ public:
       clear();
       return end();
     }
-    array_[ind].~T();
     for (size_t i = ind; i < size_; ++i) {
-      array_[i] = std::move(array_[i + 1]);
+      array_[i].~T();
+      new(&array_[i]) T(array_[i + 1]);
     }
-    --size_;
+    array_[size_--].~T();
     if (size_ * 3 <= capacity_) {
       ShrinkCapacity();
     }
