@@ -1,3 +1,5 @@
+// Acknowledgement : Thank Boju Zhang for discussing with me about the bug of memory leak in function Insert
+
 #ifndef SJTU_VECTOR_HPP
 #define SJTU_VECTOR_HPP
 
