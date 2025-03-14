@@ -132,6 +132,9 @@ public:
       max_ = nullptr;
       return;
     }
+    if (CheckException()) {
+      throw sjtu::runtime_error();
+    }
     node *las = head_;
     while (las->nxt_ != max_) {
       las = las->nxt_;
@@ -191,6 +194,9 @@ public:
       other.size_ = 0;
       other.head_->nxt_ = nullptr;
       return;
+    }
+    if (CheckException() || other.CheckException()) {
+      throw sjtu::runtime_error();
     }
     if (size() == 1 || other.size() == 1) {
       try {
@@ -315,6 +321,20 @@ private:
       }
       cur = cur->nxt_;
     }
+  }
+  bool CheckException() const { // Special check for lovely(*******) corner case.
+    if (size_ > 1) {
+      try {
+        if (head_->nxt_->nxt_ != nullptr) { 
+          Compare()(head_->nxt_->val_, head_->nxt_->nxt_->val_);
+        } else {
+          Compare()(head_->nxt_->val_, head_->nxt_->son_->val_);
+        }
+      } catch (...) {
+        return true;
+      }
+    }
+    return false;
   }
 };
 

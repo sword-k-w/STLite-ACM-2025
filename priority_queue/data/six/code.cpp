@@ -254,13 +254,40 @@ bool test5() {
 
 int main() {
     int score = 0;
-    if (test1()
-        && test2()
-        && test3()
-        && test4()
-        && test5()) {
-        score = 1;
+    if (!test1()) {
+        std::cout << "test1 error!\n";
+    } else {
+        std::cout << "test1 passed!\n";
+        if (!test2()) {
+            std::cout << "test2 error!\n";
+        } else {
+            std::cout << "test2 passed!\n";
+            if (!test3()) {
+                std::cout << "test3 error!\n";
+            } else {
+                std::cout << "test3 passed!\n";
+                if (!test4()) {
+                    std::cout << "test4 error!\n";
+                } else {
+                    std::cout << "test4 passed!\n";
+                    if (!test5()) {
+                        std::cout << "test5 error!\n";
+                    } else {
+                        std::cout << "test5 passed!\n";
+                        std::cout << "all test passed!\n";
+                        std::cout << "1\n";
+                    }
+                }
+            }
+        }
     }
-    std::cout << score << std::endl;
+    // if (test1()
+    //     && test2()
+    //     && test3()
+    //     && test4()
+    //     && test5()) {
+    //     score = 1;
+    // }
+    // std::cout << score << std::endl;
     return 0;
 }

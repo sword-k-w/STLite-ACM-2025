@@ -1,0 +1,1 @@
+/usr/bin/c++ -g -g -fsanitize=address -fsanitize=undefined -fsanitize=leak CMakeFiles/pq_four.dir/data/four/code.cpp.o -o pq_four 

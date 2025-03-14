@@ -1,0 +1,6 @@
+10 9 8 7 6 5 4 3 2 1
+Exception-safety enough... for now.
+19 17 15 13 11
+9999 9998 9997 9996 9995 9994 9993 9992 9991 9990 9989 9988 9987 9986 9985 9984 9983 9982 9981 9980
+Function "MoveAssignTest" has taken 869 us.
+# The time is still only a reference. But it shouldn't be too long.

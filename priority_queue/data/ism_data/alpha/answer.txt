@@ -1,0 +1,38 @@
+# Fibonacci/relaxed heaps have better time complexity over leftist/skew/binomial/pairing trees/heaps:
+#   in insertion, as O(1)
+#   in union, as O(1)
+# but worse coefficients.
+# In comparison, here are two possible outputs.
+# 1. skew heap
+
+Small test:
+Function "TestInsertion1" has taken 1 ms.
+Function "TestInsertion2" has taken 1 ms.
+Function "TestUnion" has taken 1 us.
+Function "TestFindMin" has taken 0 us.
+Function "TestDeletion" has taken 12 ms.
+
+Larger test:
+Function "TestInsertion1" has taken 7026 ms.
+Function "TestInsertion2" has taken 9884 ms.
+Function "TestUnion" has taken 9 us.
+Function "TestFindMin" has taken 0 us.
+Function "TestDeletion" has taken 64592 ms.
+
+# 2. fibonacci heap
+
+Small test:
+Function "TestInsertion1" has taken 0 ms.
+Function "TestInsertion2" has taken 0 ms.
+Function "TestUnion" has taken 0 us.
+Function "TestFindMin" has taken 0 us.
+Function "TestDeletion" has taken 1 ms.
+
+Larger test:
+Function "TestInsertion1" has taken 1066 ms.
+Function "TestInsertion2" has taken 1078 ms.
+Function "TestUnion" has taken 1 us.
+Function "TestFindMin" has taken 0 us.
+Function "TestDeletion" has taken 976 ms.
+
+# It's worthy to write fibonacci heaps.
