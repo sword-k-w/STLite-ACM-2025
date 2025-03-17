@@ -122,7 +122,6 @@ bool test3() {
         std::cout << "test3: Unexpected exception during setup: " << e.what() << std::endl;
         return false;
     }
-
     std::vector<int> originalState = copyQueueState(pq);
 
     sjtu::priority_queue<TestData, FaultyCompare> pq_rebuilt = pq;
