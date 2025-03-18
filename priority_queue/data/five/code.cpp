@@ -19,6 +19,7 @@ bool testmerge()
 	int pointer = 0;
 	const int MAXA = 400000;
 	const int MAXB = 400000;
+	clock_t begin = clock();
 	for (int i = 1; i <= MAXA; i++) {
 		pq1.push(buffer[++pointer] = rand());
 	}
@@ -37,7 +38,10 @@ bool testmerge()
 			pq1.pop();
 			pointer--;
 		}
+		clock_t end = clock();
+		std::cerr << (end - begin) / 1024.0 / 1024.0 << '\n';
 	}
+	// std::cout << "tot: " << sjtu::tot / 1024.0 / 1024.0 << '\n';
 	return true;
 }
 

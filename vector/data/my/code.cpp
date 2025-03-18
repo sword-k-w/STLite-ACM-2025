@@ -1,18 +1,20 @@
-#include "vector.hpp"
+#include "../../src/vector.hpp"
 
 #include <iostream>
 
 #include <vector>
 
+void solve(int *p) {
+	sjtu::vector<int *> v;
+	v.push_back(p);
+	std::cout << *v[0] << '\n';
+}
+
 int main()
 {
-	sjtu::vector<long long> v;
-	for (long long i = 0; i < 1LL << 3; ++i) {
-		v.push_back(i);
-	}
-	for (long long i = 0; i < 1LL << 3; ++i) {
-		std::cout << v.back() << '\n';
-		v.pop_back();
-	}
+	int *p = new int(5);
+	solve(p);
+	std::cout << *p << '\n';
+	delete p;
 	return 0;
 }
